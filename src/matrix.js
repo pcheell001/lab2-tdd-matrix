@@ -1,17 +1,34 @@
 
+function sameShape(A, B) {
+  return A.length === B.length &&
+    A.every((row, i) => row.length === B[i].length);
+}
+
 function add(A, B) {
+  if (!sameShape(A, B)) {
+    throw new Error('Розміри матриць мають збігатися');
+  }
+
   return A.map((row, i) =>
     row.map((value, j) => value + B[i][j])
   );
 }
 
 function subtract(A, B) {
+  if (!sameShape(A, B)) {
+    throw new Error('Розміри матриць мають збігатися');
+  }
+
   return A.map((row, i) =>
     row.map((value, j) => value - B[i][j])
   );
 }
 
 function multiply(A, B) {
+  if (A[0].length !== B.length) {
+    throw new Error('Несумісні розміри для множення');
+  }
+
   const result = [];
 
   for (let i = 0; i < A.length; i++) {
