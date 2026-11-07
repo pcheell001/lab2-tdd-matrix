@@ -33,8 +33,15 @@ function multiply(A, B) {
   return result;
 }
 
+function transpose(A) {
+  return A[0].map((_, j) =>
+    A.map(row => row[j])
+  );
+}
+
 module.exports = {
   add,
   subtract,
-  multiply
+  multiply,
+  transpose
 };
