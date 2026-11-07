@@ -1,6 +1,8 @@
 
 function add(A, B) {
-  throw new Error('Функція ще не реалізована');
+  return A.map((row, i) =>
+    row.map((value, j) => value + B[i][j])
+  );
 }
 
 module.exports = { add };
