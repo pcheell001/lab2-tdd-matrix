@@ -4,26 +4,28 @@ function sameShape(A, B) {
     A.every((row, i) => row.length === B[i].length);
 }
 
+// Общая функция для поэлементных операций
+function elementWise(A, B, operation) {
+  if (!sameShape(A, B)) {
+    throw new Error('Розміри матриць мають збігатися');
+  }
+
+  return A.map((row, i) =>
+    row.map((value, j) => operation(value, B[i][j]))
+  );
+}
+
+// Сложение
 function add(A, B) {
-  if (!sameShape(A, B)) {
-    throw new Error('Розміри матриць мають збігатися');
-  }
-
-  return A.map((row, i) =>
-    row.map((value, j) => value + B[i][j])
-  );
+  return elementWise(A, B, (a, b) => a + b);
 }
 
+// Вычитание
 function subtract(A, B) {
-  if (!sameShape(A, B)) {
-    throw new Error('Розміри матриць мають збігатися');
-  }
-
-  return A.map((row, i) =>
-    row.map((value, j) => value - B[i][j])
-  );
+  return elementWise(A, B, (a, b) => a - b);
 }
 
+// Умножение
 function multiply(A, B) {
   if (A[0].length !== B.length) {
     throw new Error('Несумісні розміри для множення');
@@ -50,12 +52,14 @@ function multiply(A, B) {
   return result;
 }
 
+// Транспонирование
 function transpose(A) {
   return A[0].map((_, j) =>
     A.map(row => row[j])
   );
 }
 
+// Экспорт функций
 module.exports = {
   add,
   subtract,
